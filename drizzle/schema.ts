@@ -14,7 +14,7 @@ export const UsersTable = pgTable(
 		id: serial('id').primaryKey(),
 		name: text('name').notNull(),
 		email: text('email').notNull(),
-		image: text('image').notNull(),
+		password: text('password').notNull(),
 		createdAt: timestamp('createdAt').defaultNow().notNull(),
 	},
 	(users) => {
