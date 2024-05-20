@@ -6,7 +6,7 @@ export default defineConfig({
 	schema: './drizzle/schema.ts',
 	out: './src/drizzle',
 	dbCredentials: {
-		url: process.env.POSTGRES_URL,
+		url: process.env.POSTGRES_URL!,
 		database: process.env.POSTGRES_DATABASE!,
 		user: process.env.POSTGRES_USER!,
 		password: process.env.POSTGRES_PASSWORD!,
