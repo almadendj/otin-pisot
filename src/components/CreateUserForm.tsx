@@ -37,6 +37,7 @@ const CreateUserForm = () => {
 			.promise(() => AuthService.register(data), {
 				pending: 'Creating user...',
 				success: 'User created successfully',
+				error: 'Failed to create user',
 			})
 			.then(() => {
 				reset();
