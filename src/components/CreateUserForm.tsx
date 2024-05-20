@@ -11,7 +11,7 @@ import { useForm } from 'react-hook-form';
 import { UserType } from '@/app/types/user';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
-import { AuthActions } from '@/app/actions/AuthActions';
+import { AuthService } from '@/app/actions/AuthActions';
 
 interface CreateUserFormType extends UserType {
 	confirm_password: string;
@@ -25,6 +25,7 @@ const CreateUserForm = () => {
 		handleSubmit,
 		formState: { errors },
 		watch,
+		reset,
 	} = useForm<CreateUserFormType>();
 
 	const onSubmit = async (data: UserType) => {
@@ -33,11 +34,13 @@ const CreateUserForm = () => {
 		setLoading(true);
 
 		toast
-			.promise(() => AuthActions.register(data), {
+			.promise(() => AuthService.register(data), {
 				pending: 'Creating user...',
 				success: 'User created successfully',
 			})
-			.then(() => {})
+			.then(() => {
+				reset();
+			})
 			.catch((e) => {
 				console.log(e);
 			})

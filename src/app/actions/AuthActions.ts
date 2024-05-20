@@ -1,17 +1,10 @@
-import db from '../../../drizzle/db';
-import { UsersTable } from '../../../drizzle/schema';
 import { UserType } from '../types/user';
-import * as bcrypt from 'bcryptjs';
+import axios from 'axios';
 
-export class AuthActions {
+export class AuthService {
 	static async register(newUser: UserType) {
-		console.log(process.env.POSTGRES_URL);
+		const registerResponse = await axios.post('/api/create-user', newUser);
 
-		const saltRounds = 10;
-		const hashedPassword = await bcrypt.hash(newUser.password, saltRounds);
-
-		return db
-			.insert(UsersTable)
-			.values({ ...newUser, password: hashedPassword });
+		return registerResponse.data;
 	}
 }
